@@ -1,0 +1,35 @@
+version: '3'
+services:
+  backend:
+    build: 
+      context: './ecommerce'
+      dockerfile: Dockerfile
+    ports:
+      - 8000:8000
+    container_name: express-container
+    networks:
+      - mern-stack-network
+    volumes:
+      - ./ecommerce:/app
+    depends_on:
+      - mongo
+  mongo:
+    image: mongo:4.4.6
+    expose:
+      - "27017"
+    ports:
+      - "27017:27017"
+    container_name: mongo_container
+    networks:
+      - mern-stack-network
+    volumes:
+      - mongoData:/data/db
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=secret
+      - MONGO_INITDB_DATABASE=ecom
+networks:
+  mern-stack-network:
+volumes:
+  mongoData:
+
