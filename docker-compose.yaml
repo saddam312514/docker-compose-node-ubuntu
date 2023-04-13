@@ -1,9 +1,7 @@
 version: '3'
 services:
   backend:
-    build: 
-      context: './ecommerce'
-      dockerfile: Dockerfile
+    build: ./ecommerce
     ports:
       - 8000:8000
     container_name: express-container
